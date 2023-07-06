@@ -4,10 +4,10 @@ import Card from "../Card/Card";
 
 const UserList = (props) => {
   return (
-    <Card className={classes.users}>
+    <Card cssClass={classes.users}>
       <ul>
         {props.users.map((user) => (
-          <li key={user.id}>
+          <li key={Math.random().toString()}>
             {user.name} ({user.age} years old)
           </li>
         ))}
