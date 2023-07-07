@@ -9,7 +9,17 @@ const AddUser = (props) => {
   const nameInputRef = useRef();
   const ageInputRef = useRef();
 
+  const [enteredName, setEnteredUserName] = useState("");
+  const [enteredUserAge, setEnteredAge] = useState("");
   const [error, setError] = useState();
+
+  const usernameChangeHandler = (event) => {
+    setEnteredUserName(event.target.value);
+    // console.log(enteredName);
+  };
+  const ageChangeHandler = (event) => {
+    setEnteredAge(event.target.value);
+  };
 
   const addUserHandler = (event) => {
     event.preventDefault();
@@ -30,8 +40,8 @@ const AddUser = (props) => {
       return;
     }
     props.onAddUser(enteredName, enteredUserAge);
-    nameInputRef.current.value = "";
-    ageInputRef.current.value = "";
+    setEnteredUserName("");
+    setEnteredAge("");
   };
 
   const errorHandler = () => {
@@ -50,9 +60,21 @@ const AddUser = (props) => {
       <Card className={classes.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
-          <input id="username" type="text" ref={nameInputRef} />
+          <input
+            id="username"
+            type="text"
+            value={enteredName}
+            onChange={usernameChangeHandler}
+            ref={nameInputRef}
+          />
           <label htmlFor="age">Age (Years)</label>
-          <input id="age" type="number" ref={ageInputRef} />
+          <input
+            id="age"
+            type="number"
+            value={enteredUserAge}
+            onChange={ageChangeHandler}
+            ref={ageInputRef}
+          />
 
           <Button type="submit">Add User</Button>
         </form>
